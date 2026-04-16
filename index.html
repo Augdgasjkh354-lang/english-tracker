@@ -11,155 +11,126 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Brooks 英语学习系统</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-:root {
-  --bg: #0a1420; --surface: #111d2e; --border: #1a2d46;
-  --text: #a8c0e0; --muted: #3a5570; --dim: #1e3555;
-  --blue: #4c6ef5; --green: #2f9e44; --orange: #e67700;
-  --red: #c92a2a; --purple: #6741d9;
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-sans: 'IBM Plex Sans', 'PingFang SC', sans-serif;
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0a1420;--surface:#111d2e;--border:#1a2d46;
+  --text:#a8c0e0;--muted:#3a5570;--dim:#1e3555;
+  --blue:#4c6ef5;--green:#2f9e44;--orange:#e67700;
+  --red:#c92a2a;--purple:#6741d9;
+  --mono:ui-monospace,'SF Mono','Courier New',monospace;
+  --sans:-apple-system,'PingFang SC','Helvetica Neue',sans-serif;
 }
-body { background: var(--bg); color: var(--text); font-family: var(--font-sans); min-height: 100vh; padding-bottom: 80px; }
-input, textarea, select, button { font-family: var(--font-sans); }
-::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;padding-bottom:20px}
+input,textarea,select,button{font-family:var(--sans)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-/* Header */
-.header { background: #060e1a; border-bottom: 1px solid var(–border); padding: 20px 20px 0; position: sticky; top: 0; z-index: 100; }
-.header-title { font-family: var(–font-mono); font-size: 18px; font-weight: 800; color: #b0ccf0; }
-.header-sub { font-size: 11px; color: var(–dim); margin-top: 3px; margin-bottom: 14px; }
-.tabs { display: flex; overflow-x: auto; gap: 0; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-.tabs::-webkit-scrollbar { display: none; }
-.tab-btn { background: none; border: none; cursor: pointer; padding: 10px 14px; font-size: 12px; font-weight: 700; white-space: nowrap; color: var(–muted); border-bottom: 2px solid transparent; transition: all 0.15s; }
-.tab-btn.active { color: #7eb8f7; border-bottom-color: var(–blue); }
+.header{background:#060e1a;border-bottom:1px solid var(–border);padding:16px 16px 0;position:sticky;top:0;z-index:100}
+.header-eyebrow{font-family:var(–mono);font-size:9px;color:var(–dim);letter-spacing:2px;margin-bottom:4px}
+.header-title{font-family:var(–mono);font-size:17px;font-weight:800;color:#b0ccf0}
+.header-sub{font-size:11px;color:var(–dim);margin-top:2px;margin-bottom:12px}
+.tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{background:none;border:none;cursor:pointer;padding:10px 12px;font-size:12px;font-weight:700;white-space:nowrap;color:var(–muted);border-bottom:2px solid transparent;transition:all .15s}
+.tab-btn.active{color:#7eb8f7;border-bottom-color:var(–blue)}
 
-/* Content */
-.content { padding: 16px 16px; }
+.content{padding:14px}
 
-/* Stats grid */
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-.stat-card { background: var(–surface); border-radius: 12px; padding: 12px 14px; border: 1px solid var(–border); }
-.stat-label { font-size: 10px; color: var(–muted); margin-bottom: 6px; letter-spacing: 0.5px; }
-.stat-value { font-family: var(–font-mono); font-size: 22px; font-weight: 800; line-height: 1; }
-.stat-hint { font-size: 10px; color: var(–dim); margin-top: 5px; }
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat-card{background:var(–surface);border-radius:12px;padding:11px 12px;border:1px solid var(–border)}
+.stat-label{font-size:9px;color:var(–muted);margin-bottom:5px;letter-spacing:.5px}
+.stat-value{font-family:var(–mono);font-size:20px;font-weight:800;line-height:1}
+.stat-unit{font-size:10px;font-weight:400;color:var(–dim)}
+.stat-hint{font-size:9px;color:var(–dim);margin-top:4px}
 
-/* Cards */
-.card { background: var(–surface); border-radius: 14px; padding: 16px; border: 1px solid var(–border); margin-bottom: 12px; }
-.card-title { font-family: var(–font-mono); font-size: 11px; font-weight: 700; color: var(–muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+.card{background:var(–surface);border-radius:14px;padding:14px;border:1px solid var(–border);margin-bottom:10px}
+.card-title{font-family:var(–mono);font-size:10px;font-weight:700;color:var(–muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
 
-/* Tags */
-.tag { display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 11px; font-family: var(–font-mono); margin-right: 5px; margin-bottom: 5px; line-height: 1.5; }
+.tag{display:inline-block;border-radius:999px;padding:3px 9px;font-size:11px;font-family:var(–mono);margin-right:4px;margin-bottom:4px;line-height:1.5}
 
-/* Day list */
-.day-item { background: var(–surface); border-radius: 12px; padding: 12px 14px; border: 1px solid var(–border); margin-bottom: 8px; cursor: pointer; transition: all 0.15s; }
-.day-item.active { border-color: var(–blue); background: #14244a; }
-.day-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.day-num { font-family: var(–font-mono); font-weight: 800; font-size: 14px; color: var(–text); }
-.day-date { font-size: 11px; color: var(–dim); }
+.day-item{background:var(–surface);border-radius:12px;padding:12px;border:1px solid var(–border);margin-bottom:8px;cursor:pointer;transition:all .15s;width:100%;text-align:left}
+.day-item.active{border-color:var(–blue);background:#14244a}
+.day-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.day-num{font-family:var(–mono);font-weight:800;font-size:14px;color:var(–text)}
+.day-date-label{font-size:10px;color:var(–dim)}
 
-/* Form */
-.form-group { margin-bottom: 14px; }
-.form-label { font-size: 12px; color: var(–muted); display: block; margin-bottom: 6px; }
-.form-input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #2e3d5a; font-size: 13px; font-family: var(–font-mono); outline: none; background: #1e2d45; color: #d0daea; }
-.form-input:focus { border-color: var(–blue); }
-textarea.form-input { resize: vertical; min-height: 80px; }
-select.form-input { appearance: none; -webkit-appearance: none; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-group{margin-bottom:12px}
+.form-label{font-size:11px;color:var(–muted);display:block;margin-bottom:5px}
+.form-input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #2e3d5a;font-size:13px;font-family:var(–mono);outline:none;background:#1e2d45;color:#d0daea}
+.form-input:focus{border-color:var(–blue)}
+textarea.form-input{resize:vertical;min-height:75px}
+select.form-input{-webkit-appearance:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
-/* Buttons */
-.btn { padding: 10px 16px; border-radius: 10px; border: none; cursor: pointer; font-family: var(–font-mono); font-size: 13px; font-weight: 700; transition: opacity 0.15s; }
-.btn:active { opacity: 0.8; }
-.btn-primary { background: var(–blue); color: #fff; width: 100%; padding: 14px; font-size: 15px; }
-.btn-sm { padding: 7px 12px; font-size: 12px; border-radius: 8px; }
+.btn{padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-family:var(–mono);font-size:13px;font-weight:700;transition:opacity .15s}
+.btn:active{opacity:.7}
+.btn-primary{background:var(–blue);color:#fff;width:100%;padding:14px;font-size:15px;margin-top:4px}
+.btn-sm{padding:7px 12px;font-size:11px;border-radius:8px;border:none;cursor:pointer;font-family:var(–mono);font-weight:700}
 
-/* Section */
-.section { margin-bottom: 18px; }
-.section-title { font-size: 10px; font-weight: 700; color: #3a5070; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+.section{margin-bottom:16px}
+.section-title{font-size:10px;font-weight:700;color:#3a5070;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px}
 
-/* Review card */
-.review-content { font-family: var(–font-mono); font-size: 14px; color: #c0d4f0; line-height: 1.7; background: #0d1929; border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; }
-.review-actions { display: flex; gap: 8px; }
+.review-content{font-family:var(–mono);font-size:14px;color:#c0d4f0;line-height:1.7;background:#0d1929;border-radius:10px;padding:12px;margin-bottom:11px}
+.review-actions{display:flex;gap:7px;flex-wrap:wrap}
 
-/* Error item */
-.error-item { background: #180d0d; border: 1px solid #3a1010; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+.error-box{background:#180d0d;border:1px solid #3a1010;border-radius:10px;padding:11px;margin-bottom:8px}
+.phrase-row{font-family:var(–mono);font-size:13px;padding:8px 0;border-bottom:1px solid #0f1929;color:#8aaac8}
+.phrase-row:last-child{border-bottom:none}
+.sentence-box{font-family:var(–mono);font-size:13px;background:#0d1929;border-radius:10px;padding:10px 12px;margin-bottom:6px;color:#6a90b8;line-height:1.65}
 
-/* Phrase item */
-.phrase-item { font-family: var(–font-mono); font-size: 13px; padding: 8px 0; border-bottom: 1px solid #0f1929; color: #8aaac8; }
-.phrase-item:last-child { border-bottom: none; }
+/* Pure CSS bar chart */
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:120px;padding:0 4px}
+.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%}
+.bar-fill{width:100%;border-radius:4px 4px 0 0;min-height:4px;transition:height .3s}
+.bar-label{font-size:9px;color:var(–muted);margin-top:5px;text-align:center;font-family:var(–mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 
-/* Sentence item */
-.sentence-item { font-family: var(–font-mono); font-size: 13px; background: #0d1929; border-radius: 10px; padding: 10px 12px; margin-bottom: 6px; color: #6a90b8; line-height: 1.65; }
+/* Pure CSS line chart */
+.line-chart-wrap{position:relative;height:120px;width:100%;overflow:hidden}
+.line-chart-svg{width:100%;height:100%}
 
-/* Chart container */
-.chart-wrap { position: relative; height: 180px; }
+.empty{background:var(–surface);border-radius:12px;border:1px dashed #1e3050;padding:22px;text-align:center}
+.empty-title{font-size:14px;font-weight:700;color:#3a5070;margin-bottom:5px}
+.empty-desc{font-size:12px;color:#1e3555}
 
-/* Empty state */
-.empty { background: var(–surface); border-radius: 12px; border: 1px dashed #1e3050; padding: 24px; text-align: center; }
-.empty-title { font-size: 14px; font-weight: 700; color: #3a5070; margin-bottom: 6px; }
-.empty-desc { font-size: 12px; color: #1e3555; }
+.toast{position:fixed;top:72px;left:50%;transform:translateX(-50%);background:#0f1e40;border:1px solid #1a3060;color:#5c8ae0;border-radius:10px;padding:9px 18px;font-size:13px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
 
-/* Toast */
-.toast { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); background: #0f1e40; border: 1px solid #1a3060; color: #5c8ae0; border-radius: 10px; padding: 10px 20px; font-size: 13px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
-.toast.show { opacity: 1; }
-
-/* Score colors */
-.score-high { color: var(–green); }
-.score-mid { color: var(–orange); }
-.score-low { color: var(–red); }
-
-/* Error rows in form */
-.error-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-bottom: 8px; }
-.error-row-fields { display: grid; gap: 6px; }
-
-/* Bottom safe area */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
-}
+.divider{border:none;border-top:1px solid #0f1929;margin:9px 0}
 </style>
 
 </head>
 <body>
-
 <div class="header">
-  <div style="font-size:10px;color:#1a3555;letter-spacing:2px;font-family:var(--font-mono);margin-bottom:4px">ENGLISH LEARNING SYSTEM</div>
+  <div class="header-eyebrow">ENGLISH LEARNING SYSTEM</div>
   <div class="header-title">Brooks 的英语学习系统</div>
   <div class="header-sub">目标：记录 · 分析 · 复习 · 闭环</div>
   <div class="tabs" id="tabs"></div>
 </div>
-
 <div class="toast" id="toast"></div>
 <div class="content" id="content"></div>
 
 <script>
-// ─── Data & Storage ──────────────────────────────────────────────────────────
-const STORAGE_KEY = 'et-data-v1';
-const REVIEW_STEPS = [1, 3, 7, 14, 30];
-const ERROR_TYPES = ['冠词 a/an 遗漏','大写错误','标点/空格','固定搭配','时态','单复数','介词','其他'];
+// ── constants ──────────────────────────────────────────────────────────────
+const SK='et-v1';
+const RS=[1,3,7,14,30];
+const ET=['冠词 a/an 遗漏','大写错误','标点/空格','固定搭配','时态','单复数','介词','其他'];
 
-function todayStr() { return new Date().toISOString().split('T')[0]; }
-function addDays(d, n) { const dt = new Date(d+'T00:00:00'); dt.setDate(dt.getDate()+n); return dt.toISOString().split('T')[0]; }
-function daysBetween(a,b) { return Math.round((new Date(b+'T00:00:00')-new Date(a+'T00:00:00'))/86400000); }
-function uid() { return Date.now()+'_'+Math.random().toString(36).slice(2,7); }
-function sa(v) { return Array.isArray(v)?v:[]; }
+// ── utils ──────────────────────────────────────────────────────────────────
+const today=()=>new Date().toISOString().split('T')[0];
+const addD=(d,n)=>{const dt=new Date(d+'T00:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().split('T')[0];};
+const diffD=(a,b)=>Math.round((new Date(b+'T00:00:00')-new Date(a+'T00:00:00'))/86400000);
+const uid=()=>Date.now()+'_'+Math.random().toString(36).slice(2,6);
+const sa=v=>Array.isArray(v)?v:[];
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-function save(data) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
-}
-function load() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) { const p = JSON.parse(raw); if (sa(p?.days).length) return p; }
-  } catch(e) {}
-  return null;
-}
+// ── storage ────────────────────────────────────────────────────────────────
+function save(data){try{localStorage.setItem(SK,JSON.stringify(data));}catch(e){}}
+function loadRaw(){try{const r=localStorage.getItem(SK);if(r){const p=JSON.parse(r);if(sa(p?.days).length)return p;}}catch(e){}return null;}
 
-const DEFAULT = { days:[{
-  id:'2026-04-15_1', day:1, date:'2026-04-15', vocab:30,
-  words:[{word:'remote',meaning:'远程的',level:1},{word:'manager',meaning:'经理',level:1},{word:'team',meaning:'团队',level:1}],
+// ── default data ───────────────────────────────────────────────────────────
+const DEFAULT={days:[{
+  id:'2026-04-15_1',day:1,date:'2026-04-15',vocab:30,
+  words:[{word:'remote',meaning:'远程的'},{word:'manager',meaning:'经理'},{word:'team',meaning:'团队'}],
   grammar:['am / is / are'],
   sentences:['I am a remote worker.','I like my job.','I need to learn words.','We are a team.','Can I help you?'],
   errors:[
@@ -168,16 +139,16 @@ const DEFAULT = { days:[{
     {type:'固定搭配',example:'I use phone',correction:'I use a phone'},
   ],
   keyPhrases:['I am a remote worker.','I want a remote job.','I need to learn words.','We are a team.','My computer is new.'],
-  score:95, note:'am/is/are 填空 10题全对', reviewItems:[],
+  score:95,note:'am/is/are 填空 10题全对',reviewItems:[],
 }]};
 
-function buildReview(day) {
-  const items=[], seen=new Set();
+// ── data model ─────────────────────────────────────────────────────────────
+function buildReview(day){
+  const items=[],seen=new Set();
   const push=(kind,title,content)=>{
-    const k=kind+'__'+content;
-    if(seen.has(k)) return; seen.add(k);
-    items.push({reviewId:uid(),kind,title,content,sourceDate:day.date,intervalIndex:0,
-      nextReview:addDays(day.date,REVIEW_STEPS[0]),doneCount:0,mastered:false,lastReviewed:''});
+    const k=kind+'|'+content;if(seen.has(k))return;seen.add(k);
+    items.push({reviewId:uid(),kind,title,content,sourceDate:day.date,
+      intervalIndex:0,nextReview:addD(day.date,RS[0]),doneCount:0,mastered:false,lastReviewed:''});
   };
   sa(day.words).forEach(w=>w.word&&push('word','单词',w.meaning?`${w.word} = ${w.meaning}`:w.word));
   sa(day.grammar).forEach(g=>g&&push('grammar','语法',g));
@@ -186,482 +157,411 @@ function buildReview(day) {
   return items;
 }
 
-function normDay(raw, idx) {
-  const date=raw?.date||todayStr();
-  const words=sa(raw?.words).map(w=>typeof w==='string'?{word:w,meaning:'',level:1}:w).filter(w=>w?.word);
+function normDay(raw,idx){
+  const date=raw?.date||today();
+  const words=sa(raw?.words).map(w=>typeof w==='string'?{word:w,meaning:''}:w).filter(w=>w?.word);
   const errors=sa(raw?.errors).map(e=>typeof e==='string'?{type:e,example:'',correction:''}:
     {type:String(e?.type||'其他'),example:String(e?.example||''),correction:String(e?.correction||'')}).filter(e=>e.type);
   const day={
-    id:raw?.id||`${date}_${idx+1}`, day:Number(raw?.day)||idx+1, date,
-    vocab:Number(raw?.vocab)||words.length||0, words,
+    id:raw?.id||`${date}_${idx+1}`,day:Number(raw?.day)||idx+1,date,
+    vocab:Number(raw?.vocab)||words.length||0,words,
     grammar:sa(raw?.grammar).map(g=>String(g||'').trim()).filter(Boolean),
     sentences:sa(raw?.sentences).map(s=>String(s||'').trim()).filter(Boolean),
-    errors, keyPhrases:sa(raw?.keyPhrases).map(p=>String(p||'').trim()).filter(Boolean),
+    errors,keyPhrases:sa(raw?.keyPhrases).map(p=>String(p||'').trim()).filter(Boolean),
     score:Math.max(0,Math.min(100,Number(raw?.score)||80)),
     note:String(raw?.note||'').trim(),
     reviewItems:sa(raw?.reviewItems).filter(Boolean),
   };
-  if(!day.reviewItems.length) day.reviewItems=buildReview(day);
+  if(!day.reviewItems.length)day.reviewItems=buildReview(day);
   return day;
 }
 
-function normData(input) {
+function normData(input){
   const raw=sa(input?.days).length?input.days:DEFAULT.days;
-  return {days:[...raw].sort((a,b)=>String(a.date).localeCompare(String(b.date))).map(normDay)};
+  return{days:[...raw].sort((a,b)=>String(a.date).localeCompare(String(b.date))).map(normDay)};
 }
 
-function parseWords(text) {
+function parseWords(text){
   return String(text||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
     const p=l.split(/[-—:=：]/);
-    return p.length>=2?{word:p[0].trim(),meaning:p.slice(1).join('-').trim(),level:1}:{word:l,meaning:'',level:1};
+    return p.length>=2?{word:p[0].trim(),meaning:p.slice(1).join('-').trim()}:{word:l,meaning:''};
   }).filter(w=>w.word);
 }
 
-// ─── State ───────────────────────────────────────────────────────────────────
-let state = { data: normData(load()), tab: 'dashboard', selectedDayId: '', search: '' };
-state.selectedDayId = state.data.days[state.data.days.length-1]?.id || '';
+// ── state ──────────────────────────────────────────────────────────────────
+let S={data:normData(loadRaw()),tab:'dashboard',selId:'',search:''};
+S.selId=S.data.days[S.data.days.length-1]?.id||'';
 
-function getDue() {
-  const today=todayStr();
-  return state.data.days.flatMap(d=>d.reviewItems
-    .filter(i=>!i.mastered&&i.nextReview<=today)
+// ── computed ───────────────────────────────────────────────────────────────
+function getDue(){
+  const t=today();
+  return S.data.days.flatMap(d=>d.reviewItems
+    .filter(i=>!i.mastered&&i.nextReview<=t)
     .map(i=>({...i,dayNumber:d.day,dayDate:d.date}))
   ).sort((a,b)=>a.nextReview.localeCompare(b.nextReview));
 }
 
-function getStreak() {
-  const days=state.data.days; if(!days.length) return 0;
+function getStreak(){
+  const days=S.data.days;if(!days.length)return 0;
   const dates=[...new Set(days.map(d=>d.date))].sort();
   const latest=dates[dates.length-1];
-  if(daysBetween(latest,todayStr())>1) return 0;
-  let s=1;
-  for(let i=dates.length-1;i>0;i--){ if(daysBetween(dates[i-1],dates[i])===1)s++;else break; }
+  if(diffD(latest,today())>1)return 0;
+  let s=1;for(let i=dates.length-1;i>0;i--){if(diffD(dates[i-1],dates[i])===1)s++;else break;}
   return s;
 }
 
-function getErrorRank(lastN=null) {
-  const days=lastN?state.data.days.filter(d=>daysBetween(d.date,todayStr())<lastN):state.data.days;
-  const m={};
-  days.flatMap(d=>d.errors).forEach(e=>{m[e.type]=(m[e.type]||0)+1;});
+function getErrRank(lastN=null){
+  const src=lastN?S.data.days.filter(d=>diffD(d.date,today())<lastN):S.data.days;
+  const m={};src.flatMap(d=>d.errors).forEach(e=>{m[e.type]=(m[e.type]||0)+1;});
   return Object.entries(m).sort((a,b)=>b[1]-a[1]).map(([type,count])=>({type,count}));
 }
 
-// ─── Render helpers ───────────────────────────────────────────────────────────
-function tag(text, color) {
-  return `<span class="tag" style="background:${color}22;color:${color};border:1px solid ${color}44">${text}</span>`;
+// ── html helpers ───────────────────────────────────────────────────────────
+function tag(text,color){
+  return `<span class="tag" style="background:${color}22;color:${color};border:1px solid ${color}44">${esc(text)}</span>`;
 }
+function scoreColor(s){return s>=90?'var(--green)':s>=75?'var(--orange)':'var(--red)';}
+function kindColor(k){return k==='word'?'var(--green)':k==='grammar'?'var(--purple)':k==='phrase'?'#0c8599':'var(--red)';}
 
-function scoreColor(s) { return s>=90?'var(--green)':s>=75?'var(--orange)':'var(--red)'; }
-
-function kindColor(kind) {
-  return kind==='word'?'var(--green)':kind==='grammar'?'var(--purple)':kind==='phrase'?'#0c8599':'var(--red)';
-}
-
-function showToast(msg) {
+function showToast(msg){
   const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2000);
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2200);
 }
 
-// ─── Charts ──────────────────────────────────────────────────────────────────
-let charts = {};
-function destroyChart(id) { if(charts[id]){charts[id].destroy();delete charts[id];} }
-
-function renderLineChart(canvasId, labels, data, color, label) {
-  destroyChart(canvasId);
-  const ctx=document.getElementById(canvasId)?.getContext('2d');
-  if(!ctx) return;
-  charts[canvasId]=new Chart(ctx,{type:'line',data:{labels,datasets:[{label,data,borderColor:color,backgroundColor:color+'22',borderWidth:2.5,pointRadius:4,pointBackgroundColor:color,tension:0.3,fill:true}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#0d1929',borderColor:'#1a2d46',borderWidth:1,titleColor:'#a8c0e0',bodyColor:'#a8c0e0'}},
-    scales:{x:{ticks:{color:'#3a5570',font:{size:10,family:'IBM Plex Mono'}},grid:{color:'#0f1e30'}},y:{ticks:{color:'#3a5570',font:{size:10}},grid:{color:'#0f1e30'}}}}});
+// ── CSS bar chart ──────────────────────────────────────────────────────────
+function barChart(items, color){
+  if(!items.length) return `<div class="empty"><div class="empty-desc">暂无数据</div></div>`;
+  const max=Math.max(...items.map(i=>i.val),1);
+  return `<div class="bar-chart">${items.map(i=>`
+    <div class="bar-col">
+      <div style="flex:1;display:flex;align-items:flex-end;width:100%">
+        <div class="bar-fill" style="height:${Math.max(4,Math.round(i.val/max*100))}%;background:${color}"></div>
+      </div>
+      <div class="bar-label">${esc(i.label)}</div>
+    </div>
+  `).join('')}</div>`;
 }
 
-function renderBarChart(canvasId, labels, data, color, label) {
-  destroyChart(canvasId);
-  const ctx=document.getElementById(canvasId)?.getContext('2d');
-  if(!ctx) return;
-  charts[canvasId]=new Chart(ctx,{type:'bar',data:{labels,datasets:[{label,data,backgroundColor:color+'cc',borderRadius:6}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#0d1929',borderColor:'#1a2d46',borderWidth:1,titleColor:'#a8c0e0',bodyColor:'#a8c0e0'}},
-    scales:{x:{ticks:{color:'#3a5570',font:{size:10,family:'IBM Plex Mono'}},grid:{color:'#0f1e30'}},y:{ticks:{color:'#3a5570',font:{size:10}},grid:{color:'#0f1e30'}}}}});
+// ── SVG line chart ─────────────────────────────────────────────────────────
+function lineChart(values, color){
+  if(values.length<2) return barChart(values.map((v,i)=>({label:`D${i+1}`,val:v})),color);
+  const W=300,H=100,pad=4;
+  const max=Math.max(...values,1);
+  const pts=values.map((v,i)=>{
+    const x=pad+(i/(values.length-1))*(W-pad*2);
+    const y=H-pad-(v/max)*(H-pad*2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+  const poly=pts.join(' ');
+  const area=`${pad},${H-pad} ${poly} ${(W-pad).toFixed(1)},${H-pad}`;
+  return `<div class="line-chart-wrap">
+    <svg class="line-chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${color}" stop-opacity=".3"/>
+        <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+      </linearGradient></defs>
+      <polygon points="${area}" fill="url(#lg)"/>
+      <polyline points="${poly}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${pts.map(p=>`<circle cx="${p.split(',')[0]}" cy="${p.split(',')[1]}" r="3.5" fill="${color}"/>`).join('')}
+    </svg>
+  </div>`;
 }
 
-// ─── Tab renderers ────────────────────────────────────────────────────────────
-function renderDashboard() {
-  const days=state.data.days;
+// ── renderers ──────────────────────────────────────────────────────────────
+function rStats(){
+  const days=S.data.days;
+  const total=days.reduce((s,d)=>s+d.vocab,0);
+  const avg=days.length?Math.round(days.reduce((s,d)=>s+d.score,0)/days.length):0;
+  const streak=getStreak();
   const due=getDue();
-  const err7=getErrorRank(7);
-  const recentPhrases=[...days].slice(-5).flatMap(d=>d.keyPhrases.map(p=>({text:p,day:d.day,date:d.date}))).slice(-8).reverse();
-  const cumVocab=days.map((d,i)=>({name:`D${d.day}`,val:days.slice(0,i+1).reduce((s,x)=>s+x.vocab,0)}));
+  const mastered=days.reduce((s,d)=>s+d.reviewItems.filter(i=>i.mastered).length,0);
+  return `<div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">累计词汇</div><div class="stat-value" style="color:var(--green)">${total}<span class="stat-unit"> 词</span></div></div>
+    <div class="stat-card"><div class="stat-label">学习天数</div><div class="stat-value" style="color:var(--blue)">${days.length}<span class="stat-unit"> 天</span></div></div>
+    <div class="stat-card"><div class="stat-label">平均得分</div><div class="stat-value" style="color:var(--orange)">${avg}<span class="stat-unit"> 分</span></div></div>
+    <div class="stat-card"><div class="stat-label">连续学习</div><div class="stat-value" style="color:var(--purple)">${streak}<span class="stat-unit"> 天</span></div><div class="stat-hint">${streak?'🔥 连击中':'从今天开始'}</div></div>
+    <div class="stat-card"><div class="stat-label">今日复习</div><div class="stat-value" style="color:var(--red)">${due.length}<span class="stat-unit"> 项</span></div><div class="stat-hint">已掌握${mastered}项</div></div>
+    <div class="stat-card"><div class="stat-label">今日日期</div><div class="stat-value" style="color:#5a7aaa;font-size:13px">${today()}</div></div>
+  </div>`;
+}
 
+function rDashboard(){
+  const days=S.data.days;
+  const due=getDue();
+  const err7=getErrRank(7);
+  const phrases=[...days].slice(-5).flatMap(d=>d.keyPhrases.map(p=>({text:p,day:d.day}))).slice(-6).reverse();
+  const cumVals=days.map((d,i)=>days.slice(0,i+1).reduce((s,x)=>s+x.vocab,0));
   return `
   <div class="card">
     <div class="card-title">累计词汇趋势</div>
-    <div class="chart-wrap"><canvas id="chart-vocab"></canvas></div>
+    ${lineChart(cumVals,'#4c6ef5')}
   </div>
   <div class="card">
-    <div class="card-title">今日待复习 <span style="color:var(--red);font-size:13px">${due.length} 项</span></div>
-    ${due.length?due.slice(0,5).map(item=>`
-      <div style="padding:10px 0;border-bottom:1px solid #0f1929">
-        ${tag(item.title,kindColor(item.kind))}
-        <div style="font-family:var(--font-mono);font-size:12px;color:#4a6a8a;margin-top:6px;line-height:1.6">${item.content}</div>
-      </div>
-    `).join(''):`<div class="empty"><div class="empty-title">今天没有待复习</div></div>`}
+    <div class="card-title">今日待复习 <span style="color:var(--red)">${due.length} 项</span></div>
+    ${due.length?due.slice(0,4).map(i=>`
+      <div style="padding:9px 0;border-bottom:1px solid #0f1929">
+        ${tag(i.title,kindColor(i.kind))}
+        <div style="font-family:var(--mono);font-size:12px;color:#4a6a8a;margin-top:5px;line-height:1.6">${esc(i.content)}</div>
+      </div>`).join(''):`<div style="font-size:13px;color:var(--muted)">今天没有待复习内容</div>`}
   </div>
   <div class="card">
     <div class="card-title">最近关键句</div>
-    ${recentPhrases.length?recentPhrases.map(p=>`
-      <div style="padding:9px 0;border-bottom:1px solid #0f1929">
-        <div style="font-family:var(--font-mono);font-size:13px;color:#8aaac8;line-height:1.6">${p.text}</div>
-        <div style="font-size:10px;color:var(--dim);margin-top:3px">Day ${p.day} · ${p.date}</div>
-      </div>
-    `).join(''):`<div class="empty-desc">录入后自动汇总</div>`}
+    ${phrases.length?phrases.map(p=>`
+      <div style="padding:8px 0;border-bottom:1px solid #0f1929">
+        <div style="font-family:var(--mono);font-size:12px;color:#8aaac8;line-height:1.6">${esc(p.text)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:2px">Day ${p.day}</div>
+      </div>`).join(''):`<div style="font-size:13px;color:var(--muted)">录入后自动汇总</div>`}
   </div>
   <div class="card">
     <div class="card-title">近7天高频错误</div>
     ${err7.length?err7.map(e=>`
-      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #0f1929">
-        <span style="font-size:13px;color:#6a8aaa">${e.type}</span>
-        <span style="font-family:var(--font-mono);font-size:13px;color:var(--red);font-weight:700">${e.count}</span>
-      </div>
-    `).join(''):`<div class="empty-desc" style="font-size:13px;color:var(--muted)">暂无记录</div>`}
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #0f1929">
+        <span style="font-size:13px;color:#6a8aaa">${esc(e.type)}</span>
+        <span style="font-family:var(--mono);font-size:13px;color:var(--red);font-weight:700">${e.count}</span>
+      </div>`).join(''):`<div style="font-size:13px;color:var(--muted)">暂无记录</div>`}
   </div>`;
 }
 
-function renderLog() {
-  const days=state.data.days;
-  const kw=state.search.toLowerCase();
+function rLog(){
+  const days=S.data.days;
+  const kw=S.search.toLowerCase();
   const filtered=kw?days.filter(d=>JSON.stringify(d).toLowerCase().includes(kw)):days;
-  const active=filtered.find(d=>d.id===state.selectedDayId)||filtered[filtered.length-1];
-
-  let detailHtml='';
-  if(active) {
-    const sc=active.score;
-    detailHtml=`
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
+  const active=filtered.find(d=>d.id===S.selId)||filtered[filtered.length-1];
+  let detail='';
+  if(active){
+    detail=`<div class="card" style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
         <div>
-          <div style="font-family:var(--font-mono);font-size:20px;font-weight:800;color:#b0ccf0">Day ${active.day}</div>
-          <div style="font-size:11px;color:var(--dim);margin-top:3px">${active.date}${active.note?' · '+active.note:''}</div>
+          <div style="font-family:var(--mono);font-size:19px;font-weight:800;color:#b0ccf0">Day ${active.day}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:3px">${esc(active.date)}${active.note?' · '+esc(active.note):''}</div>
         </div>
         <div style="text-align:right">
-          <div style="font-family:var(--font-mono);font-size:28px;font-weight:800;color:${scoreColor(sc)}">${sc}</div>
+          <div style="font-family:var(--mono);font-size:26px;font-weight:800;color:${scoreColor(active.score)}">${active.score}</div>
           <div style="font-size:10px;color:var(--muted)">得分</div>
         </div>
       </div>
-      <div class="section">
-        <div class="section-title">词汇</div>
+      <div class="section"><div class="section-title">词汇</div>
         ${tag('新增 '+active.vocab+' 词','var(--green)')}
-        ${active.words.length?'<div style="margin-top:8px">'+active.words.map(w=>tag(w.meaning?`${w.word} = ${w.meaning}`:w.word,'var(--green)')).join('')+'</div>':''}
+        ${active.words.map(w=>tag(w.meaning?`${w.word}=${w.meaning}`:w.word,'var(--green)')).join('')}
       </div>
-      <div class="section">
-        <div class="section-title">语法点</div>
+      <div class="section"><div class="section-title">语法点</div>
         ${active.grammar.length?active.grammar.map(g=>tag(g,'var(--purple)')).join(''):'<span style="font-size:13px;color:var(--dim)">无</span>'}
       </div>
-      ${active.sentences.length?`<div class="section"><div class="section-title">练习句型</div>${active.sentences.map(s=>`<div class="sentence-item">${s}</div>`).join('')}</div>`:''}
+      ${active.sentences.length?`<div class="section"><div class="section-title">练习句型</div>${active.sentences.map(s=>`<div class="sentence-box">${esc(s)}</div>`).join('')}</div>`:''}
       ${active.errors.length?`<div class="section"><div class="section-title">今日错误</div>${active.errors.map(e=>`
-        <div class="error-item">
-          ${tag(e.type,'var(--red)')}
-          ${e.example?`<div style="font-size:12px;color:#5a2a2a;margin-top:6px">错误：${e.example}</div>`:''}
-          ${e.correction?`<div style="font-family:var(--font-mono);font-size:12px;color:#8aaac8;margin-top:4px">正确：${e.correction}</div>`:''}
+        <div class="error-box">${tag(e.type,'var(--red)')}
+          ${e.example?`<div style="font-size:12px;color:#5a2a2a;margin-top:6px">错误：${esc(e.example)}</div>`:''}
+          ${e.correction?`<div style="font-family:var(--mono);font-size:12px;color:#8aaac8;margin-top:3px">正确：${esc(e.correction)}</div>`:''}
         </div>`).join('')}</div>`:''}
-      ${active.keyPhrases.length?`<div class="section"><div class="section-title">关键句</div>${active.keyPhrases.map((p,i)=>`<div class="phrase-item">${i+1}. ${p}</div>`).join('')}</div>`:''}
+      ${active.keyPhrases.length?`<div class="section"><div class="section-title">关键句</div>${active.keyPhrases.map((p,i)=>`<div class="phrase-row">${i+1}. ${esc(p)}</div>`).join('')}</div>`:''}
     </div>`;
   }
-
   return `
-  <div style="margin-bottom:12px">
-    <input class="form-input" id="search-input" placeholder="搜索单词 / 错误 / 日期…" value="${state.search}" oninput="onSearch(this.value)">
+  <div style="margin-bottom:10px">
+    <input class="form-input" id="search-inp" placeholder="搜索…" value="${esc(S.search)}" oninput="doSearch(this.value)">
   </div>
   ${filtered.length?filtered.map(d=>`
-    <div class="day-item${active?.id===d.id?' active':''}" onclick="selectDay('${d.id}')">
-      <div class="day-item-header">
-        <span class="day-num">Day ${d.day}</span>
-        <span class="day-date">${d.date}</span>
-      </div>
-      ${tag('+'+d.vocab+' 词','var(--green)')}
-      ${tag(d.score+' 分',scoreColor(d.score))}
-      ${d.errors.length?tag(d.errors.length+' 类错误','var(--red)'):''}
-    </div>
-  `).join(''):`<div class="empty"><div class="empty-title">无结果</div></div>`}
-  ${detailHtml}`;
+    <button class="day-item${active?.id===d.id?' active':''}" onclick="selDay('${d.id}')">
+      <div class="day-header"><span class="day-num">Day ${d.day}</span><span class="day-date-label">${d.date}</span></div>
+      ${tag('+'+d.vocab+' 词','var(--green)')}${tag(d.score+' 分',scoreColor(d.score))}${d.errors.length?tag(d.errors.length+' 类错误','var(--red)'):''}
+    </button>`).join(''):`<div class="empty"><div class="empty-title">无结果</div></div>`}
+  ${detail}`;
 }
 
-function renderAnalytics() {
-  const days=state.data.days;
-  const cumVocab=days.map((d,i)=>({name:`D${d.day}`,val:days.slice(0,i+1).reduce((s,x)=>s+x.vocab,0)}));
-  const scores=days.map(d=>({name:`D${d.day}`,val:d.score}));
-  const errAll=getErrorRank();
-
+function rAnalytics(){
+  const days=S.data.days;
+  const cumVals=days.map((d,i)=>days.slice(0,i+1).reduce((s,x)=>s+x.vocab,0));
+  const scoreVals=days.map(d=>d.score);
+  const errAll=getErrRank();
+  const errItems=errAll.slice(0,8).map(e=>({label:e.type.length>5?e.type.slice(0,5)+'…':e.type,val:e.count}));
   return `
-  <div class="card">
-    <div class="card-title">累计词汇量</div>
-    <div class="chart-wrap"><canvas id="chart-vocab2"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="card-title">每日得分趋势</div>
-    <div class="chart-wrap"><canvas id="chart-score"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="card-title">错误类型分布</div>
-    ${errAll.length?`<div class="chart-wrap"><canvas id="chart-err"></canvas></div>`:`<div class="empty"><div class="empty-title">暂无错误数据</div></div>`}
-  </div>
+  <div class="card"><div class="card-title">累计词汇量</div>${lineChart(cumVals,'#4c6ef5')}</div>
+  <div class="card"><div class="card-title">每日得分趋势</div>${lineChart(scoreVals,'#2f9e44')}</div>
+  <div class="card"><div class="card-title">错误类型分布</div>${barChart(errItems,'#c92a2a')}</div>
   <div class="card">
     <div class="card-title">全时段高频错误</div>
     ${errAll.length?errAll.map(e=>`
-      <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #0f1929">
-        <span style="font-size:13px;color:#6a8aaa">${e.type}</span>
-        <span style="font-family:var(--font-mono);font-size:13px;color:var(--red);font-weight:700">${e.count}</span>
-      </div>
-    `).join(''):`<div class="empty-desc" style="font-size:13px;color:var(--muted)">暂无数据</div>`}
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #0f1929">
+        <span style="font-size:13px;color:#6a8aaa">${esc(e.type)}</span>
+        <span style="font-family:var(--mono);font-size:13px;color:var(--red);font-weight:700">${e.count}</span>
+      </div>`).join(''):`<div style="font-size:13px;color:var(--muted)">暂无数据</div>`}
   </div>`;
 }
 
-function renderReview() {
+function rReview(){
   const due=getDue();
-  if(!due.length) return `<div class="empty"><div class="empty-title">今天没有待复习内容</div><div class="empty-desc">继续保持，下一批会自动出现</div></div>`;
-  return due.map(item=>`
-    <div class="card" id="rv-${item.reviewId}">
+  if(!due.length)return`<div class="empty"><div class="empty-title">今天没有待复习内容</div><div class="empty-desc">继续保持，下一批会自动出现</div></div>`;
+  return due.map(i=>`
+    <div class="card" id="rv-${i.reviewId}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-        <div>${tag(item.title,kindColor(item.kind))} ${tag('Day '+item.dayNumber,'var(--muted)')}</div>
-        <div style="font-size:11px;color:var(--dim)">已复习 ${item.doneCount} 次</div>
+        <div>${tag(i.title,kindColor(i.kind))} ${tag('Day '+i.dayNumber,'var(--muted)')}</div>
+        <div style="font-size:11px;color:var(--dim)">复习${i.doneCount}次</div>
       </div>
-      <div class="review-content">${item.content}</div>
+      <div class="review-content">${esc(i.content)}</div>
       <div class="review-actions">
-        <button class="btn btn-sm" style="background:#2a1215;color:#e03131" onclick="doReview('${item.reviewId}','again')">再来一次</button>
-        <button class="btn btn-sm" style="background:#0f1e40;color:#5c8ae0" onclick="doReview('${item.reviewId}','good')">记住了</button>
-        <button class="btn btn-sm" style="background:#0a1e12;color:var(--green)" onclick="doReview('${item.reviewId}','master')">已掌握</button>
+        <button class="btn-sm" style="background:#2a1215;color:#e03131" onclick="doRv('${i.reviewId}','again')">再来</button>
+        <button class="btn-sm" style="background:#0f1e40;color:#5c8ae0" onclick="doRv('${i.reviewId}','good')">记住了</button>
+        <button class="btn-sm" style="background:#0a1e12;color:var(--green)" onclick="doRv('${i.reviewId}','master')">已掌握</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function renderAdd() {
-  const nextDay=state.data.days.length+1;
-  return `
-  <div class="card">
-    <div style="font-family:var(--font-mono);font-size:16px;font-weight:800;color:#a8c0e0;margin-bottom:16px">＋ 录入 Day ${nextDay}</div>
-    <div class="two-col" style="margin-bottom:14px">
-      <div class="form-group" style="margin:0">
-        <label class="form-label">日期</label>
-        <input type="date" class="form-input" id="f-date" value="${todayStr()}">
+let _errRows=[{type:'',example:'',correction:''}];
+function rErrRows(){
+  return _errRows.map((r,i)=>`
+    <div style="margin-bottom:10px">
+      <select class="form-input" style="margin-bottom:6px" onchange="upErr(${i},'type',this.value)">
+        <option value="">选择错误类型</option>
+        ${ET.map(t=>`<option${r.type===t?' selected':''}>${esc(t)}</option>`).join('')}
+      </select>
+      <div class="two-col">
+        <input class="form-input" placeholder="错误例子" value="${esc(r.example)}" oninput="upErr(${i},'example',this.value)">
+        <input class="form-input" placeholder="正确写法" value="${esc(r.correction)}" oninput="upErr(${i},'correction',this.value)">
       </div>
-      <div class="form-group" style="margin:0">
-        <label class="form-label">新词汇数</label>
-        <input type="number" class="form-input" id="f-vocab" placeholder="30">
-      </div>
+      ${i>0?`<button class="btn-sm" style="background:#2a1215;color:#e03131;margin-top:5px" onclick="rmErr(${i})">移除</button>`:''}
+    </div>`).join('');
+}
+
+function rAdd(){
+  const next=S.data.days.length+1;
+  return `<div class="card">
+    <div style="font-family:var(--mono);font-size:15px;font-weight:800;color:#a8c0e0;margin-bottom:14px">＋ 录入 Day ${next}</div>
+    <div class="two-col" style="margin-bottom:12px">
+      <div class="form-group" style="margin:0"><label class="form-label">日期</label><input type="date" class="form-input" id="f-date" value="${today()}"></div>
+      <div class="form-group" style="margin:0"><label class="form-label">新词汇数</label><input type="number" class="form-input" id="f-vocab" placeholder="30"></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">单词清单（每行一个；支持 remote - 远程的）</label>
-      <textarea class="form-input" id="f-words" placeholder="remote - 远程的&#10;manager - 经理"></textarea>
+    <div class="form-group"><label class="form-label">单词清单（每行；支持 remote - 远程的）</label><textarea class="form-input" id="f-words" placeholder="remote - 远程的&#10;manager - 经理"></textarea></div>
 
 ```
+<div class="form-group"><label class="form-label">语法点（逗号分隔）</label><input type="text" class="form-input" id="f-grammar" placeholder="have / has, do / does"></div>
+<div class="form-group"><label class="form-label">练习句型（每行一句）</label><textarea class="form-input" id="f-sentences"></textarea></div>
+<div class="form-group"><label class="form-label">今日错误</label><div id="err-rows">${rErrRows()}</div>
+  <button class="btn-sm" style="background:#0f1929;color:#5a7ab0;margin-top:4px" onclick="addErr()">＋ 添加错误</button>
 </div>
-<div class="form-group">
-  <label class="form-label">语法点（逗号分隔）</label>
-  <input type="text" class="form-input" id="f-grammar" placeholder="have / has, do / does">
+<div class="form-group"><label class="form-label">今日关键句（每行一句）</label><textarea class="form-input" id="f-phrases"></textarea></div>
+<div class="two-col" style="margin-bottom:12px">
+  <div class="form-group" style="margin:0"><label class="form-label">得分 (0-100)</label><input type="number" class="form-input" id="f-score" placeholder="85" min="0" max="100"></div>
+  <div class="form-group" style="margin:0"><label class="form-label">备注</label><input type="text" class="form-input" id="f-note" placeholder="可选"></div>
 </div>
-<div class="form-group">
-  <label class="form-label">练习句型（每行一句）</label>
-  <textarea class="form-input" id="f-sentences"></textarea>
-</div>
-<div class="form-group">
-  <label class="form-label">今日错误</label>
-  <div id="err-rows"></div>
-  <button class="btn btn-sm" style="background:#0f1929;color:#5a7ab0;margin-top:4px" onclick="addErrRow()">＋ 添加错误</button>
-</div>
-<div class="form-group">
-  <label class="form-label">今日关键句（每行一句）</label>
-  <textarea class="form-input" id="f-phrases"></textarea>
-</div>
-<div class="two-col" style="margin-bottom:14px">
-  <div class="form-group" style="margin:0">
-    <label class="form-label">今日得分 (0-100)</label>
-    <input type="number" class="form-input" id="f-score" placeholder="85" min="0" max="100">
-  </div>
-  <div class="form-group" style="margin:0">
-    <label class="form-label">备注</label>
-    <input type="text" class="form-input" id="f-note" placeholder="可选">
-  </div>
-</div>
-<button class="btn btn-primary" onclick="submitDay()">保存 Day ${nextDay}</button>
+<button class="btn btn-primary" onclick="submitDay()">保存 Day ${next}</button>
 ```
 
   </div>`;
 }
 
-function renderSettings() {
+function rSettings(){
 return `
 
-  <div class="card">
-    <div class="card-title">导出数据</div>
-    <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px">把全部记录导出为 JSON 文件，方便备份和跨设备恢复。</div>
-    <button class="btn btn-sm" style="background:#0f1e40;color:#5c8ae0" onclick="exportData()">导出 JSON</button>
+  <div class="card"><div class="card-title">导出数据</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:11px">把全部记录导出为 JSON 文件。换设备时导入即可恢复。</div>
+    <button class="btn-sm" style="background:#0f1e40;color:#5c8ae0" onclick="exportD()">导出 JSON</button>
   </div>
-  <div class="card">
-    <div class="card-title">导入数据</div>
-    <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px">导入之前导出的 JSON 文件，会替换当前所有数据。</div>
-    <button class="btn btn-sm" style="background:#0a1e12;color:var(--green)" onclick="document.getElementById('import-file').click()">选择文件</button>
-    <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(this)">
+  <div class="card"><div class="card-title">导入数据</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:11px">导入之前导出的 JSON 文件，替换当前所有数据。</div>
+    <button class="btn-sm" style="background:#0a1e12;color:var(--green)" onclick="document.getElementById('imp').click()">选择文件</button>
+    <input type="file" id="imp" accept=".json" style="display:none" onchange="importD(this)">
   </div>
-  <div class="card">
-    <div class="card-title">危险操作</div>
-    <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px">清空所有学习数据，不可撤销。</div>
-    <button class="btn btn-sm" style="background:#180d0d;color:#e03131" onclick="clearAll()">清空全部</button>
+  <div class="card"><div class="card-title">危险操作</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:11px">清空所有数据，不可撤销。</div>
+    <button class="btn-sm" style="background:#180d0d;color:#e03131" onclick="clearAll()">清空全部</button>
   </div>`;
 }
 
-// ─── Render engine ────────────────────────────────────────────────────────────
-function renderStats() {
-const days=state.data.days;
-const totalVocab=days.reduce((s,d)=>s+d.vocab,0);
-const avgScore=days.length?Math.round(days.reduce((s,d)=>s+d.score,0)/days.length):0;
-const streak=getStreak();
+// ── render ─────────────────────────────────────────────────────────────────
+const TABS=[[‘dashboard’,‘🏠 首页’],[‘log’,‘📋 日志’],[‘analytics’,‘📊 分析’],[‘review’,‘🔁 复习’],[‘add’,‘＋ 录入’],[‘settings’,‘⚙️ 设置’]];
+
+function render(){
 const due=getDue();
-const mastered=days.reduce((s,d)=>s+d.reviewItems.filter(i=>i.mastered).length,0);
-return `
-
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-label">累计词汇</div><div class="stat-value" style="color:var(--green)">${totalVocab}<span style="font-size:11px;color:var(--muted)"> 词</span></div></div>
-    <div class="stat-card"><div class="stat-label">学习天数</div><div class="stat-value" style="color:var(--blue)">${days.length}<span style="font-size:11px;color:var(--muted)"> 天</span></div></div>
-    <div class="stat-card"><div class="stat-label">平均得分</div><div class="stat-value" style="color:var(--orange)">${avgScore}<span style="font-size:11px;color:var(--muted)"> 分</span></div></div>
-    <div class="stat-card"><div class="stat-label">连续学习</div><div class="stat-value" style="color:var(--purple)">${streak}<span style="font-size:11px;color:var(--muted)"> 天</span></div><div class="stat-hint">${streak?'🔥 连击中':'从今天开始'}</div></div>
-    <div class="stat-card"><div class="stat-label">今日复习</div><div class="stat-value" style="color:var(--red)">${due.length}<span style="font-size:11px;color:var(--muted)"> 项</span></div><div class="stat-hint">已掌握 ${mastered} 项</div></div>
-    <div class="stat-card"><div class="stat-label">今日日期</div><div class="stat-value" style="color:#5a7aaa;font-size:14px">${todayStr()}</div></div>
-  </div>`;
-}
-
-const TAB_LABELS = [[‘dashboard’,‘🏠 首页’],[‘log’,‘📋 日志’],[‘analytics’,‘📊 分析’],[‘review’,‘🔁 复习’],[‘add’,‘＋ 录入’],[‘settings’,‘⚙️ 设置’]];
-
-function renderTabs() {
-const due=getDue();
-document.getElementById(‘tabs’).innerHTML=TAB_LABELS.map(([key,label])=>{
-const badge=key===‘review’&&due.length?` (${due.length})`:’’;
-return `<button class="tab-btn${state.tab===key?' active':''}" onclick="setTab('${key}')">${label}${badge}</button>`;
+document.getElementById(‘tabs’).innerHTML=TABS.map(([k,l])=>{
+const b=k===‘review’&&due.length?` (${due.length})`:’’;
+return `<button class="tab-btn${S.tab===k?' active':''}" onclick="setTab('${k}')">${l}${b}</button>`;
 }).join(’’);
-}
 
-function renderContent() {
-let html=’’;
-html+=renderStats();
-if(state.tab===‘dashboard’) html+=renderDashboard();
-else if(state.tab===‘log’) html+=renderLog();
-else if(state.tab===‘analytics’) html+=renderAnalytics();
-else if(state.tab===‘review’) html+=renderReview();
-else if(state.tab===‘add’) html+=renderAdd();
-else if(state.tab===‘settings’) html+=renderSettings();
+let html=rStats();
+if(S.tab===‘dashboard’)html+=rDashboard();
+else if(S.tab===‘log’)html+=rLog();
+else if(S.tab===‘analytics’)html+=rAnalytics();
+else if(S.tab===‘review’)html+=rReview();
+else if(S.tab===‘add’){_errRows=[{type:’’,example:’’,correction:’’}];html+=rAdd();}
+else if(S.tab===‘settings’)html+=rSettings();
 document.getElementById(‘content’).innerHTML=html;
-
-// Init error rows for add form
-if(state.tab===‘add’) { window._errRows=[{type:’’,example:’’,correction:’’}]; renderErrRows(); }
-
-// Charts
-const days=state.data.days;
-if(state.tab===‘dashboard’&&days.length) {
-const cum=days.map((d,i)=>days.slice(0,i+1).reduce((s,x)=>s+x.vocab,0));
-renderLineChart(‘chart-vocab’,days.map(d=>`D${d.day}`),cum,’#4c6ef5’,‘累计词汇’);
-}
-if(state.tab===‘analytics’&&days.length) {
-const cum=days.map((d,i)=>days.slice(0,i+1).reduce((s,x)=>s+x.vocab,0));
-renderLineChart(‘chart-vocab2’,days.map(d=>`D${d.day}`),cum,’#4c6ef5’,‘累计词汇’);
-renderLineChart(‘chart-score’,days.map(d=>`D${d.day}`),days.map(d=>d.score),’#2f9e44’,‘得分’);
-const errAll=getErrorRank();
-if(errAll.length) renderBarChart(‘chart-err’,errAll.map(e=>e.type.length>6?e.type.slice(0,6)+’…’:e.type),errAll.map(e=>e.count),’#c92a2a’,‘次数’);
-}
 }
 
-function render() { renderTabs(); renderContent(); }
+// ── actions ────────────────────────────────────────────────────────────────
+window.setTab=t=>{S.tab=t;render();window.scrollTo(0,0);};
+window.selDay=id=>{S.selId=id;render();setTimeout(()=>document.querySelector(’.card’)?.scrollIntoView({behavior:‘smooth’}),50);};
+window.doSearch=v=>{S.search=v;document.getElementById(‘content’).innerHTML=rStats()+rLog();};
 
-// ─── Error rows (add form) ────────────────────────────────────────────────────
-function renderErrRows() {
-const rows=window._errRows||[];
-document.getElementById(‘err-rows’).innerHTML=rows.map((r,i)=>` <div style="margin-bottom:8px"> <select class="form-input" style="margin-bottom:6px" onchange="updErr(${i},'type',this.value)"> <option value="">选择错误类型</option> ${ERROR_TYPES.map(t=>`<option${r.type===t?’ selected’:’’}>${t}</option>`).join('')} </select> <div class="two-col"> <input class="form-input" placeholder="错误例子" value="${r.example}" oninput="updErr(${i},'example',this.value)"> <input class="form-input" placeholder="正确写法" value="${r.correction}" oninput="updErr(${i},'correction',this.value)"> </div> ${i>0?`<button class="btn btn-sm" style="background:#2a1215;color:#e03131;margin-top:6px" onclick="removeErr(${i})">移除</button>`:''} </div> `).join(’’);
-}
-
-window.addErrRow=()=>{ window._errRows.push({type:’’,example:’’,correction:’’}); renderErrRows(); };
-window.updErr=(i,k,v)=>{ window._errRows[i][k]=v; };
-window.removeErr=(i)=>{ window._errRows.splice(i,1); renderErrRows(); };
-
-// ─── Actions ──────────────────────────────────────────────────────────────────
-window.setTab=(tab)=>{ state.tab=tab; render(); };
-window.selectDay=(id)=>{ state.selectedDayId=id; render(); };
-window.onSearch=(val)=>{ state.search=val; renderContent(); };
-
-window.doReview=(reviewId, mode)=>{
-const today=todayStr();
-state.data.days=state.data.days.map(day=>({…day,reviewItems:day.reviewItems.map(item=>{
-if(item.reviewId!==reviewId) return item;
-if(mode===‘again’) return {…item,intervalIndex:0,nextReview:addDays(today,1),lastReviewed:today};
-if(mode===‘good’){const ni=Math.min(item.intervalIndex+1,REVIEW_STEPS.length-1);return {…item,intervalIndex:ni,nextReview:addDays(today,REVIEW_STEPS[ni]),doneCount:item.doneCount+1,lastReviewed:today};}
-if(mode===‘master’) return {…item,mastered:true,doneCount:item.doneCount+1,lastReviewed:today};
+window.doRv=(id,mode)=>{
+const t=today();
+S.data.days=S.data.days.map(day=>({…day,reviewItems:day.reviewItems.map(item=>{
+if(item.reviewId!==id)return item;
+if(mode===‘again’)return{…item,intervalIndex:0,nextReview:addD(t,1),lastReviewed:t};
+if(mode===‘good’){const ni=Math.min(item.intervalIndex+1,RS.length-1);return{…item,intervalIndex:ni,nextReview:addD(t,RS[ni]),doneCount:item.doneCount+1,lastReviewed:t};}
+if(mode===‘master’)return{…item,mastered:true,doneCount:item.doneCount+1,lastReviewed:t};
 return item;
 })}));
-save(state.data);
-// Just remove the card for instant feedback, don’t full re-render
-const card=document.getElementById(`rv-${reviewId}`);
-if(card){card.style.opacity=‘0’;card.style.transition=‘opacity 0.3s’;setTimeout(()=>{card.remove();},300);}
-renderTabs();
-showToast(mode===‘master’?‘✓ 已掌握’:mode===‘good’?‘✓ 记住了，下次加长间隔’:‘↺ 下次再来’);
+save(S.data);
+const card=document.getElementById(‘rv-’+id);
+if(card){card.style.transition=‘opacity .25s’;card.style.opacity=‘0’;setTimeout(()=>{card.remove();document.getElementById(‘tabs’).innerHTML=TABS.map(([k,l])=>{const b=k===‘review’&&getDue().length?` (${getDue().length})`:’’;return`<button class="tab-btn${S.tab===k?' active':''}" onclick="setTab('${k}')">${l}${b}</button>`;}).join(’’);},260);}
+showToast(mode===‘master’?‘✓ 已掌握’:mode===‘good’?‘✓ 记住了’:‘↺ 再练一次’);
 };
+
+window.addErr=()=>{_errRows.push({type:’’,example:’’,correction:’’});document.getElementById(‘err-rows’).innerHTML=rErrRows();};
+window.rmErr=i=>{_errRows.splice(i,1);document.getElementById(‘err-rows’).innerHTML=rErrRows();};
+window.upErr=(i,k,v)=>{_errRows[i][k]=v;};
 
 window.submitDay=()=>{
 const date=document.getElementById(‘f-date’)?.value;
 if(!date){showToast(‘请填写日期’);return;}
 const words=parseWords(document.getElementById(‘f-words’)?.value||’’);
 const day={
-id:uid(), day:state.data.days.length+1, date,
-vocab:Number(document.getElementById(‘f-vocab’)?.value)||words.length||0, words,
+id:uid(),day:S.data.days.length+1,date,
+vocab:Number(document.getElementById(‘f-vocab’)?.value)||words.length||0,words,
 grammar:(document.getElementById(‘f-grammar’)?.value||’’).split(/[,，]/).map(s=>s.trim()).filter(Boolean),
 sentences:(document.getElementById(‘f-sentences’)?.value||’’).split(’\n’).map(s=>s.trim()).filter(Boolean),
-errors:(window._errRows||[]).map(e=>({type:e.type.trim(),example:e.example.trim(),correction:e.correction.trim()})).filter(e=>e.type),
+errors:_errRows.map(e=>({type:e.type.trim(),example:e.example.trim(),correction:e.correction.trim()})).filter(e=>e.type),
 keyPhrases:(document.getElementById(‘f-phrases’)?.value||’’).split(’\n’).map(s=>s.trim()).filter(Boolean),
 score:Math.max(0,Math.min(100,Number(document.getElementById(‘f-score’)?.value)||80)),
-note:(document.getElementById(‘f-note’)?.value||’’).trim(), reviewItems:[],
+note:(document.getElementById(‘f-note’)?.value||’’).trim(),reviewItems:[],
 };
 day.reviewItems=buildReview(day);
-state.data.days.push(normDay(day,state.data.days.length));
-state.data.days.sort((a,b)=>a.date.localeCompare(b.date)).forEach((d,i)=>{d.day=i+1;});
-state.selectedDayId=day.id;
-save(state.data);
-state.tab=‘log’;
-showToast(‘已保存 ✓’);
-render();
+S.data.days.push(normDay(day,S.data.days.length));
+S.data.days.sort((a,b)=>a.date.localeCompare(b.date)).forEach((d,i)=>{d.day=i+1;});
+S.selId=day.id;
+save(S.data);
+S.tab=‘log’;showToast(‘已保存 ✓’);render();
 };
 
-window.exportData=()=>{
-const blob=new Blob([JSON.stringify(state.data,null,2)],{type:‘application/json’});
+window.exportD=()=>{
+const blob=new Blob([JSON.stringify(S.data,null,2)],{type:‘application/json’});
 const url=URL.createObjectURL(blob);
-const a=document.createElement(‘a’);
-a.href=url; a.download=`english-log-${todayStr()}.json`; a.click();
-URL.revokeObjectURL(url);
+const a=document.createElement(‘a’);a.href=url;a.download=`english-log-${today()}.json`;a.click();URL.revokeObjectURL(url);
 };
 
-window.importData=(input)=>{
-const file=input.files?.[0]; if(!file) return;
+window.importD=input=>{
+const file=input.files?.[0];if(!file)return;
 const reader=new FileReader();
 reader.onload=e=>{
 try{
-const parsed=JSON.parse(String(e.target.result));
-if(!sa(parsed?.days).length) throw new Error(‘empty’);
-state.data=normData(parsed);
-state.selectedDayId=state.data.days[state.data.days.length-1]?.id||’’;
-save(state.data); showToast(‘导入成功 ✓’); render();
-}catch{showToast(‘导入失败：文件格式不正确’);}
+const p=JSON.parse(String(e.target.result));
+if(!sa(p?.days).length)throw new Error(‘empty’);
+S.data=normData(p);S.selId=S.data.days[S.data.days.length-1]?.id||’’;
+save(S.data);showToast(‘导入成功 ✓’);render();
+}catch{showToast(‘导入失败：格式不正确’);}
 };
-reader.readAsText(file);
-input.value=’’;
+reader.readAsText(file);input.value=’’;
 };
 
 window.clearAll=()=>{
-if(!confirm(‘确认清空全部数据？此操作不可撤销。’)) return;
-state.data=normData({days:[]});
-state.selectedDayId=’’;
-save(state.data); showToast(‘已清空’); render();
+if(!confirm(‘确认清空全部数据？’))return;
+S.data=normData({days:[]});S.selId=’’;
+save(S.data);showToast(‘已清空’);render();
 };
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
-if(‘serviceWorker’ in navigator) {
-navigator.serviceWorker.register(‘sw.js’).catch(()=>{});
-}
+// ── init ───────────────────────────────────────────────────────────────────
+if(‘serviceWorker’ in navigator){navigator.serviceWorker.register(‘sw.js’).catch(()=>{});}
 render();
 </script>
 
