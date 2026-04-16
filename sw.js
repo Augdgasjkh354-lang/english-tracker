@@ -1,4 +1,4 @@
-const CACHE = ‘et-v1’;
+const CACHE = 'et-v2';
 const ASSETS = [
 ‘/english-tracker/’,
 ‘/english-tracker/index.html’,
